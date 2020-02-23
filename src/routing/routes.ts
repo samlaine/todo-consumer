@@ -5,16 +5,22 @@ export const routes: IRoute[] = [
     {
         name: RouteNames.USER_CREATE,
         component: CreateUserScreen,
-        options: {}
+        options: {
+            title: 'Register user'
+        }
     },
     {
         name: RouteNames.LOGIN,
         component: LoginScreen,
-        options: {}
+        options: {
+            title: 'Login'
+        }
     },
     {
         name: RouteNames.TODO_LIST,
         component: TodoListScreen,
-        options: {}
+        options: {
+            title: 'Todos'
+        }
     }
 ]

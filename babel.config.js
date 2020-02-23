@@ -20,7 +20,7 @@ module.exports = {
                     screens: './src/screens',
                     state: './src/state',
                     routing: './src/routing',
-                    components: './src/routing',
+                    components: './src/components',
                     theme: './src/theme',
                     types: './src/types',
                     utils: './src/utils',

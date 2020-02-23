@@ -16,7 +16,8 @@ import {
 } from './types'
 
 const initialState = {
-    accessToken: undefined
+    accessToken: undefined,
+    userCreated: false
 }
 
 type IAuthActions =
@@ -30,6 +31,7 @@ type IAuthActions =
 
 export interface IAuthState {
     accessToken: string | undefined
+    userCreated: boolean
 }
 
 export const authReducer = (state: IAuthState = initialState, action: IAuthActions): IAuthState => {
@@ -42,10 +44,14 @@ export const authReducer = (state: IAuthState = initialState, action: IAuthActio
             }
         case LOGIN:
         case LOGIN_FAILED:
-        case REGISTER_USER:
-        case REGISTER_USER_SUCCESS:
-        case REGISTER_USER_FAILED:
             return state
+        case REGISTER_USER:
+        case REGISTER_USER_FAILED:
+            return { ...state, userCreated: false }
+
+        case REGISTER_USER_SUCCESS: {
+            return { ...state, userCreated: true }
+        }
         default:
             return state
     }

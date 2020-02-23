@@ -1,3 +1,5 @@
+import { Dimensions } from 'react-native'
+
 const colors = {
     /**
      * #E5D4ED
@@ -33,17 +35,17 @@ const spacing = {
     /**
      * 16
      */
-    s: 16,
+    sm: 16,
     /**
      * 20
      */
-    m: 20,
+    md: 20,
     /**
      * 24
      */
-    l: 24,
+    lg: 24,
     /**
-     * 30px
+     * 30
      */
     xl: 30
 }
@@ -71,8 +73,14 @@ const fontSize = {
     xl: 24
 }
 
+const screen = {
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height
+}
+
 export const theme = {
     colors,
     spacing,
-    fontSize
+    fontSize,
+    screen
 }

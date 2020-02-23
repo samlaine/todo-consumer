@@ -29,6 +29,7 @@
         "import/prefer-default-export": "off",
         "import/no-unresolved": "off",
         "react/prop-types": "off",
+        "react/jsx-props-no-spreading": "off",
         "import/extensions": "off",
         "prettier/prettier": [
             "error",
