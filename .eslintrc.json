@@ -1,0 +1,47 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "@react-native-community",
+        "airbnb",
+        "prettier",
+        "prettier/react",
+        "plugin:prettier/recommended",
+        "eslint-config-prettier"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "prettier"],
+    "rules": {
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "off",
+        "react/prop-types": "off",
+        "import/extensions": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "trailingComma": "none",
+                "singleQuote": true,
+                "semi": false,
+                "bracketSpacing": true,
+                "printWidth": 120,
+                "useTabs": false,
+                "tabWidth": 4
+            }
+        ],
+        "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }]
+    }
+}
