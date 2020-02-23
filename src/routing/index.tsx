@@ -11,10 +11,10 @@ interface Props {
     initialRouteName?: RouteNames
 }
 
-export const AppNavigation: React.FC<Props> = ({ initialRouteName = RouteNames.LOGIN }) => {
+export const AppNavigation: React.FC<Props> = ({ initialRouteName = RouteNames.LOGIN }: Props) => {
     const generateAppRoutes = () => {
         return routes.map(route => (
-            <Stack.Screen name={route.name} component={route.component} options={route.options} />
+            <Stack.Screen key={route.name} name={route.name} component={route.component} options={route.options} />
         ))
     }
 

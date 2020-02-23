@@ -1,10 +1,5 @@
 import { IRoute, RouteNames } from 'types/routing'
-import {
-    Login as LoginScreen,
-    TodoList as TodoListScreen,
-    CreateTodo as CreateTodoScreen,
-    CreateUser as CreateUserScreen
-} from 'screens'
+import { Login as LoginScreen, TodoList as TodoListScreen, CreateUser as CreateUserScreen } from 'screens'
 
 export const routes: IRoute[] = [
     {
