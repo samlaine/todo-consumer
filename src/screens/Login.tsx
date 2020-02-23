@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ActivityIndicator } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import { Typography } from 'components/primitives'
@@ -44,6 +44,8 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
     const dispatch = useDispatch()
     const accessToken = useSelector(state => state.authState.accessToken)
     const authError = useSelector(state => state.authState.authError)
+    const loading = useSelector(state => state.authState.loading)
+
     const [emailInput, setEmail] = React.useState('')
     const [pwInput, setPassword] = React.useState('')
 
@@ -64,6 +66,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View>
+                {loading && <ActivityIndicator size="large" color={theme.colors.mediumPurple} />}
                 {authError && (
                     <View style={styles.errorBounds}>
                         <Typography style={styles.errorText} size="md">

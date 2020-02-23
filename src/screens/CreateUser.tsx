@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, Alert } from 'react-native'
+import { View, StyleSheet, Alert, ActivityIndicator } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import { Typography } from 'components/primitives'
@@ -41,6 +41,8 @@ export const CreateUser: React.FC<CreateUserProps> = ({ navigation }) => {
     const dispatch = useDispatch()
     const userCreated = useSelector(state => state.authState.userCreated)
     const authError = useSelector(state => state.authState.authError)
+    const loading = useSelector(state => state.authState.loading)
+
     const [formSent, setFormSent] = React.useState(false)
     const [emailInput, setEmail] = React.useState({ value: '', isValid: false })
     const [pwInput, setPassword] = React.useState({ value: '', isValid: false })
@@ -62,6 +64,7 @@ export const CreateUser: React.FC<CreateUserProps> = ({ navigation }) => {
     }
 
     const navigateBack = () => {
+        // TODO: show message that user created succesfully
         navigation.pop()
     }
 
@@ -81,6 +84,7 @@ export const CreateUser: React.FC<CreateUserProps> = ({ navigation }) => {
     return (
         <View style={[styles.container]}>
             <View>
+                {loading && <ActivityIndicator size="large" color={theme.colors.mediumPurple} />}
                 {authError && (
                     /* reused, so should be extracted into a component */
                     <View style={styles.errorBounds}>

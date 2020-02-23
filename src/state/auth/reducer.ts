@@ -18,6 +18,7 @@ import {
 const initialState = {
     accessToken: null,
     userCreated: false,
+    loading: false,
     authError: null
 }
 
@@ -33,6 +34,7 @@ type IAuthActions =
 export interface IAuthState {
     accessToken: string | null
     userCreated: boolean
+    loading: boolean
     authError: {
         code: number
         message: string
@@ -45,18 +47,23 @@ export const authReducer = (state: IAuthState = initialState, action: IAuthActio
         case SET_AUTH_TOKEN:
             return {
                 ...state,
-                accessToken: action.payload.token
+                accessToken: action.payload.token,
+                loading: false
             }
         case LOGIN:
-            return { ...state, authError: null }
+            return { ...state, authError: null, loading: true }
         case REGISTER_USER:
-            return { ...state, userCreated: false, authError: null }
+            return { ...state, userCreated: false, authError: null, loading: true }
         case LOGIN_FAILED:
         case REGISTER_USER_FAILED:
-            return { ...state, authError: { code: action.payload.code, message: action.payload.message } }
+            return {
+                ...state,
+                authError: { code: action.payload.code, message: action.payload.message },
+                loading: false
+            }
 
         case REGISTER_USER_SUCCESS: {
-            return { ...state, userCreated: true }
+            return { ...state, userCreated: true, loading: false }
         }
         default:
             return state
