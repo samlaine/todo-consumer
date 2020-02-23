@@ -10,6 +10,10 @@ export interface IGetTodos {
 
 export interface IGetTodosFailed {
     type: 'GET_TODOS_FAILED'
+    payload?: {
+        code: number
+        message: string
+    }
 }
 
 export interface IGetTodosSuccess {
@@ -29,6 +33,10 @@ export interface ISaveTodo {
 
 export interface ISaveTodoFailed {
     type: 'SAVE_TODO_FAILED'
+    payload?: {
+        code: number
+        message: string
+    }
 }
 
 export interface ISaveTodoSuccess {
@@ -48,6 +56,10 @@ export interface IRemoveTodo {
 
 export interface IRemoveTodoFailed {
     type: 'REMOVE_TODO_FAILED'
+    payload?: {
+        code: number
+        message: string
+    }
 }
 
 export interface IRemoveTodoSuccess {

@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     input: {
         paddingLeft: theme.spacing.lg,
         paddingRight: theme.spacing.sm,
-        paddingVertical: theme.spacing.md
+        paddingVertical: theme.spacing.md,
+        marginVertical: theme.spacing.xxs
     },
     focused: {
         borderRadius: 4,

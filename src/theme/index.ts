@@ -20,7 +20,11 @@ const colors = {
     /**
      * #1D1128
      */
-    darkGrey: '#1D1128'
+    darkGrey: '#1D1128',
+    /**
+     * #FFF
+     */
+    white: '#FFF'
 }
 
 const spacing = {

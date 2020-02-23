@@ -65,8 +65,8 @@ export const todoReducer = (state: ITodoState = initialState, action: TTodoActio
                 todos: state.todos.filter(todo => todo.id !== action.payload.todoId)
             }
         case SAVE_TODO_SUCCESS:
-            if (getExistingIndex(state.todos, action.payload.todo.id) > 0) {
-                const newTodos = { ...state.todos }
+            if (getExistingIndex(state.todos, action.payload.todo.id) >= 0) {
+                const newTodos = [...state.todos]
                 newTodos[getExistingIndex(state.todos, action.payload.todo.id)] = action.payload.todo
                 return { ...state, todos: newTodos }
             }
