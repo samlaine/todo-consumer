@@ -10,6 +10,7 @@ import { login } from 'state/auth'
 
 import { theme } from 'theme'
 import { RouteNames } from 'types/routing'
+import { getErrorMessageByErrorcode } from 'utils'
 
 const styles = StyleSheet.create({
     container: {
@@ -22,6 +23,16 @@ const styles = StyleSheet.create({
     interactableText: {
         color: theme.colors.mediumPurple,
         fontWeight: '500'
+    },
+    errorBounds: {
+        paddingHorizontal: theme.spacing.md,
+        paddingVertical: theme.spacing.md,
+        backgroundColor: theme.colors.lightPurple,
+        borderRadius: 4
+    },
+    errorText: {
+        color: theme.colors.white,
+        fontWeight: '500'
     }
 })
 
@@ -32,6 +43,7 @@ interface LoginProps {
 export const Login: React.FC<LoginProps> = ({ navigation }) => {
     const dispatch = useDispatch()
     const accessToken = useSelector(state => state.authState.accessToken)
+    const authError = useSelector(state => state.authState.authError)
     const [emailInput, setEmail] = React.useState('')
     const [pwInput, setPassword] = React.useState('')
 
@@ -50,16 +62,24 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
     }
 
     return (
-        <View style={[styles.container]}>
-            <UserForm
-                email={emailInput}
-                onEmailChange={setEmail}
-                password={pwInput}
-                onPasswordChange={setPassword}
-                submitAction="Login"
-                onSubmit={submitLogin}
-            />
-
+        <View style={styles.container}>
+            <View>
+                {authError && (
+                    <View style={styles.errorBounds}>
+                        <Typography style={styles.errorText} size="md">
+                            {getErrorMessageByErrorcode(authError.code, 'login')}
+                        </Typography>
+                    </View>
+                )}
+                <UserForm
+                    email={emailInput}
+                    onEmailChange={setEmail}
+                    password={pwInput}
+                    onPasswordChange={setPassword}
+                    submitAction="Login"
+                    onSubmit={submitLogin}
+                />
+            </View>
             <Typography size="xs">
                 Not a member yet?{' '}
                 <Typography size="sm" onPress={navigateToCreateAccount} style={styles.interactableText}>

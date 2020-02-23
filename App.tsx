@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
 })
 
 const App = () => {
+    // TODO store auth_token into local storage and read and determine default route based on validity
     return (
         <Provider store={store}>
             <SafeAreaView style={styles.container}>

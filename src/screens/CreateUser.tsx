@@ -7,6 +7,7 @@ import { theme } from 'theme'
 import { useDispatch, useSelector } from 'state'
 import { register } from 'state/auth'
 import { UserForm } from 'components'
+import { getErrorMessageByErrorcode } from 'utils'
 
 const styles = StyleSheet.create({
     container: {
@@ -19,6 +20,16 @@ const styles = StyleSheet.create({
     interactableText: {
         color: theme.colors.mediumPurple,
         fontWeight: '500'
+    },
+    errorBounds: {
+        paddingHorizontal: theme.spacing.md,
+        paddingVertical: theme.spacing.md,
+        backgroundColor: theme.colors.lightPurple,
+        borderRadius: 4
+    },
+    errorText: {
+        color: theme.colors.white,
+        fontWeight: '500'
     }
 })
 
@@ -29,6 +40,7 @@ interface CreateUserProps {
 export const CreateUser: React.FC<CreateUserProps> = ({ navigation }) => {
     const dispatch = useDispatch()
     const userCreated = useSelector(state => state.authState.userCreated)
+    const authError = useSelector(state => state.authState.authError)
     const [formSent, setFormSent] = React.useState(false)
     const [emailInput, setEmail] = React.useState({ value: '', isValid: false })
     const [pwInput, setPassword] = React.useState({ value: '', isValid: false })
@@ -68,15 +80,24 @@ export const CreateUser: React.FC<CreateUserProps> = ({ navigation }) => {
 
     return (
         <View style={[styles.container]}>
-            <UserForm
-                email={emailInput.value}
-                onEmailChange={onSetEmail}
-                password={pwInput.value}
-                onPasswordChange={onSetPassword}
-                submitAction="Register user"
-                onSubmit={submitRegister}
-            />
-
+            <View>
+                {authError && (
+                    /* reused, so should be extracted into a component */
+                    <View style={styles.errorBounds}>
+                        <Typography style={styles.errorText} size="md">
+                            {getErrorMessageByErrorcode(authError.code, 'register')}
+                        </Typography>
+                    </View>
+                )}
+                <UserForm
+                    email={emailInput.value}
+                    onEmailChange={onSetEmail}
+                    password={pwInput.value}
+                    onPasswordChange={onSetPassword}
+                    submitAction="Register user"
+                    onSubmit={submitRegister}
+                />
+            </View>
             <Typography size="xs">
                 Already got account?{' '}
                 <Typography size="sm" onPress={navigateBack} style={styles.interactableText}>

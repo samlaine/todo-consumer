@@ -21,7 +21,8 @@ export const getUsersTodos = () => (dispatch: Dispatch) => {
         })
         .catch(e => {
             if (e.response) {
-                dispatch({ type: GET_TODOS_FAILED, payload: { code: e.response.code, message: e.response.message } })
+                dispatch({ type: GET_TODOS_FAILED, payload: { code: e.response.status, message: e.response.message } })
+                return
             }
             dispatch({ type: GET_TODOS_FAILED, payload: { code: 500, message: 'http_client_error' } })
         })
@@ -40,7 +41,8 @@ export const createTodoItem = (todoItem: ITodoBody) => (dispatch: Dispatch) => {
         })
         .catch(e => {
             if (e.response) {
-                dispatch({ type: SAVE_TODO_FAILED, payload: { code: e.response.code, message: e.response.message } })
+                dispatch({ type: SAVE_TODO_FAILED, payload: { code: e.response.status, message: e.response.message } })
+                return
             }
             dispatch({ type: SAVE_TODO_FAILED, payload: { code: 500, message: 'http_client_error' } })
         })
@@ -54,7 +56,8 @@ export const modifyTodoItem = (id: number, todoItem: ITodoBody) => (dispatch: Di
         })
         .catch(e => {
             if (e.response) {
-                dispatch({ type: SAVE_TODO_FAILED, payload: { code: e.response.code, message: e.response.message } })
+                dispatch({ type: SAVE_TODO_FAILED, payload: { code: e.response.status, message: e.response.message } })
+                return
             }
             dispatch({ type: SAVE_TODO_FAILED, payload: { code: 500, message: 'http_client_error' } })
         })
@@ -68,7 +71,11 @@ export const deleteTodoItem = (id: number) => (dispatch: Dispatch) => {
         })
         .catch(e => {
             if (e.esponse) {
-                dispatch({ type: REMOVE_TODO_FAILED, payload: { code: e.response.code, message: e.response.message } })
+                dispatch({
+                    type: REMOVE_TODO_FAILED,
+                    payload: { code: e.response.status, message: e.response.message }
+                })
+                return
             }
             dispatch({ type: REMOVE_TODO_FAILED, payload: { code: 500, message: 'http_client_error' } })
         })

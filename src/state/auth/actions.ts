@@ -28,18 +28,10 @@ export const login = (email: string, password: string) => (dispatch: Dispatch) =
         })
         .catch(e => {
             if (e.response) {
-                dispatch({
-                    type: LOGIN_FAILED,
-                    payload: {
-                        code: e.response.code,
-                        message: e.response.message
-                    }
-                })
-            } else {
-                dispatch({
-                    type: LOGIN_FAILED
-                })
+                dispatch({ type: LOGIN_FAILED, payload: { code: e.response.status, message: e.response.message } })
+                return
             }
+            dispatch({ type: LOGIN_FAILED, payload: { code: 500, message: 'http_client_error' } })
         })
 }
 
@@ -54,15 +46,13 @@ export const register = (email: string, password: string) => (dispatch: Dispatch
             if (e.response) {
                 dispatch({
                     type: REGISTER_USER_FAILED,
-                    payload: {
-                        code: e.response.code,
-                        message: e.response.message
-                    }
+                    payload: { code: e.response.status, message: e.response.message }
                 })
-            } else {
-                dispatch({
-                    type: REGISTER_USER_FAILED
-                })
+                return
             }
+            dispatch({
+                type: REGISTER_USER_FAILED,
+                payload: { code: 500, message: 'http_client_error' }
+            })
         })
 }

@@ -16,8 +16,9 @@ import {
 } from './types'
 
 const initialState = {
-    accessToken: undefined,
-    userCreated: false
+    accessToken: null,
+    userCreated: false,
+    authError: null
 }
 
 type IAuthActions =
@@ -30,8 +31,12 @@ type IAuthActions =
     | IRegisterUserSuccess
 
 export interface IAuthState {
-    accessToken: string | undefined
+    accessToken: string | null
     userCreated: boolean
+    authError: {
+        code: number
+        message: string
+    } | null
 }
 
 export const authReducer = (state: IAuthState = initialState, action: IAuthActions): IAuthState => {
@@ -43,11 +48,12 @@ export const authReducer = (state: IAuthState = initialState, action: IAuthActio
                 accessToken: action.payload.token
             }
         case LOGIN:
-        case LOGIN_FAILED:
-            return state
+            return { ...state, authError: null }
         case REGISTER_USER:
+            return { ...state, userCreated: false, authError: null }
+        case LOGIN_FAILED:
         case REGISTER_USER_FAILED:
-            return { ...state, userCreated: false }
+            return { ...state, authError: { code: action.payload.code, message: action.payload.message } }
 
         case REGISTER_USER_SUCCESS: {
             return { ...state, userCreated: true }
