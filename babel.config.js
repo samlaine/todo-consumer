@@ -22,7 +22,9 @@ module.exports = {
                     routing: './src/routing',
                     components: './src/routing',
                     theme: './src/theme',
-                    types: './src/types'
+                    types: './src/types',
+                    utils: './src/utils',
+                    api: './src/api'
                 }
             }
         ]
