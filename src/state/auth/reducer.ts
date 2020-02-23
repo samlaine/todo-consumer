@@ -34,13 +34,13 @@ export interface IAuthState {
 
 export const authReducer = (state: IAuthState = initialState, action: IAuthActions): IAuthState => {
     switch (action.type) {
+        case LOGIN_SUCCESS:
         case SET_AUTH_TOKEN:
             return {
                 ...state,
                 accessToken: action.payload.token
             }
         case LOGIN:
-        case LOGIN_SUCCESS:
         case LOGIN_FAILED:
         case REGISTER_USER:
         case REGISTER_USER_SUCCESS:

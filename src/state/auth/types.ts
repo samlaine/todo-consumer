@@ -16,6 +16,10 @@ export interface IRegisterUser {
 }
 export interface IRegisterUserFailed {
     type: 'REGISTER_USER_FAILED'
+    payload?: {
+        code: number
+        message: string
+    }
 }
 export interface IRegisterUserSuccess {
     type: 'REGISTER_USER_SUCCESS'
@@ -30,7 +34,12 @@ export interface ILogin {
 }
 export interface ILoginFailed {
     type: 'LOGIN_FAILED'
+    payload?: {
+        code: number
+        message: string
+    }
 }
 export interface ILoginSuccess {
     type: 'LOGIN_SUCCESS'
+    payload: { token: string }
 }
